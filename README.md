@@ -11,4 +11,5 @@ This file is a little more complicated as it requires elastic on your computer a
 This needs two queries: one that returns the tweets, one that returns the answer
 
 Query 1 EXAMPLE: localhost:5000/tweets/**elonmusk**
+
 Query 2 EXAMPLE: http://localhost:5000/search?query=**What%20cologne%20does%20elon%20musk%20like**
