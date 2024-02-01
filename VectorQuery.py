@@ -5,21 +5,21 @@ from apify_client import ApifyClient
 from datetime import datetime, timedelta
 import openai
 import os
+from dotenv import load_dotenv
 
+# Load environment variables
+load_dotenv()
 
 app = Flask(__name__)
 
-es_username = 'elastic'
-es_password = 'MHtdbIroswOBhEsc1z=F'
+es_username = os.getenv('ES_USERNAME')
+es_password = os.getenv('ES_PASSWORD')
+openai.api_key = os.getenv('OPENAI_API_KEY')
 
-openai.api_key = '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'
-
-# Elasticsearch setup
+# Elasticsearch and other setups
 es = Elasticsearch("https://localhost:9200", http_auth=(es_username, es_password), verify_certs=False)
 model = SentenceTransformer('all-MiniLM-L6-v2')
-
-# Initialize the Apify Client with your token
-client = ApifyClient(token='apify_api_B7DcUY3VZbUhQROKDRT7hv0DDxIqUU31sn6e')
+client = ApifyClient(token=os.getenv('APIFY_TOKEN'))
 
 @app.route('/tweets/<username>', methods=['GET'])
 def get_tweets(username):
